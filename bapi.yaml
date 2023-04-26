@@ -1,0 +1,3492 @@
+swagger: '2.0'
+info:
+  version: 1.4.1.4961
+  title: enosix Connect
+  description: API Connector to SAP® - Rapid Integration Objects ©
+  contact:
+    name: enosix
+    email: contact@enosix.com
+  license:
+    name: enosix Connect Terms of Service
+    url: https://docs.connect.enosix.io/tos.html
+paths:
+  /api/rfc/SAP/bapi_material_availability:
+    post:
+      tags:
+        - RFC
+      operationId: Execute SAP-BAPI_MATERIAL_AVAILABILITY
+      consumes:
+        - application/json-patch+json
+        - application/json
+        - text/json
+        - application/*+json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - name: rfc
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_RFC'
+        - name: Accept-Language
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_Result'
+        '401':
+          description: 'Unauthorized, API requires credentials to connection '
+definitions:
+  ENSX_BUSOBJ_GET_SCHEME_BUSOBJ_GET_SCHEME:
+    type: object
+    properties:
+      businessObjectName:
+        type: string
+      parameter:
+        type: string
+      language:
+        type: string
+      clientType:
+        format: int32
+        type: integer
+      schema:
+        type: string
+      return:
+        type: string
+      success:
+        type: boolean
+      xoutput:
+        type: string
+  ENSX_BUSOBJ_GET_SCHEME_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/ENSX_BUSOBJ_GET_SCHEME_BUSOBJ_GET_SCHEME'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  ReturnMessage:
+    type: object
+    properties:
+      type:
+        enum:
+          - default
+          - success
+          - warning
+          - error
+          - info
+          - abnormalEnd
+          - sapExit
+        type: string
+      message:
+        type: string
+  ENSX_FUBA_GET_SCHEME_FUBA_GET_SCHEME:
+    type: object
+    properties:
+      functionName:
+        type: string
+      language:
+        type: string
+      schema:
+        type: string
+      return:
+        type: string
+      success:
+        type: boolean
+      xoutput:
+        type: string
+  ENSX_FUBA_GET_SCHEME_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/ENSX_FUBA_GET_SCHEME_FUBA_GET_SCHEME'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  ENSX_SBC_GET_DICTKEYS_SBC_GET_DICTKEYS:
+    type: object
+    properties:
+      i_Withcaption:
+        type: boolean
+      keys:
+        type: string
+  ENSX_SBC_GET_DICTKEYS_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/ENSX_SBC_GET_DICTKEYS_SBC_GET_DICTKEYS'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  ENSX_SEARCH_GET_SCHEME_SEARCH_GET_SCHEME:
+    type: object
+    properties:
+      businessObjectName:
+        type: string
+      searchEntity:
+        type: string
+      searchProcess:
+        type: string
+      language:
+        type: string
+      clientType:
+        format: int32
+        type: integer
+      schema:
+        type: string
+      o_OUTPUT:
+        type: string
+      return:
+        type: string
+      success:
+        type: boolean
+  ENSX_SEARCH_GET_SCHEME_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/ENSX_SEARCH_GET_SCHEME_SEARCH_GET_SCHEME'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  EnosixBO_Search_EnosixBO_SC:
+    type: object
+    properties:
+      searchparams:
+        $ref: '#/definitions/EnosixBO_Search_SEARCHPARAMS'
+      pagingOptions:
+        $ref: '#/definitions/PagingOptions'
+  EnosixBO_Search_SEARCHPARAMS:
+    type: object
+    properties:
+      serviceName:
+        type: string
+      cid:
+        type: string
+  PagingOptions:
+    type: object
+    properties:
+      pageSize:
+        format: int32
+        default: 10
+        type: integer
+      pageNumber:
+        format: int32
+        default: 1
+        type: integer
+      sortFields:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SortField'
+  SortField:
+    type: object
+    properties:
+      precedence:
+        format: int32
+        type: integer
+      fieldName:
+        type: string
+      sortDirection:
+        type: string
+  EnosixBO_Search_EnosixBO_SR:
+    type: object
+    properties:
+      results:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/EnosixBO_Search_SEARCHRESULT'
+      pagingInfo:
+        $ref: '#/definitions/PagingInfo'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  EnosixBO_Search_SEARCHRESULT:
+    type: object
+    properties:
+      serviceName:
+        type: string
+      description:
+        type: string
+      usage:
+        format: int32
+        type: integer
+      isDetail:
+        type: boolean
+      isSearch:
+        type: boolean
+      isQuery:
+        type: boolean
+      process:
+        type: string
+      cid:
+        type: string
+  PagingInfo:
+    type: object
+    properties:
+      totalRecords:
+        format: int64
+        type: integer
+      pageSize:
+        format: int32
+        default: 10
+        type: integer
+      pageNumber:
+        format: int32
+        default: 1
+        type: integer
+      sortFields:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SortField'
+  SAP_BAPI_MATERIAL_AVAILABILITY_RFC:
+    type: object
+    properties:
+      batch:
+        maxLength: 10
+        type: string
+      checkRule:
+        maxLength: 2
+        type: string
+      customer:
+        maxLength: 10
+        type: string
+      decForRounding:
+        maxLength: 2
+        type: string
+      decForRoundingX:
+        maxLength: 1
+        type: string
+      docNumber:
+        maxLength: 10
+        type: string
+      itmNumber:
+        maxLength: 6
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      plant:
+        maxLength: 4
+        type: string
+      readAtpLock:
+        maxLength: 1
+        type: string
+      readAtpLockX:
+        maxLength: 1
+        type: string
+      stgeLoc:
+        maxLength: 4
+        type: string
+      stockInd:
+        maxLength: 1
+        type: string
+      unit:
+        maxLength: 3
+        type: string
+      wbsElem:
+        maxLength: 24
+        type: string
+      avQtyPlt:
+        maxLength: 7
+        type: string
+      dialogflag:
+        maxLength: 1
+        type: string
+      endleadtme:
+        format: date-time
+        type: string
+      materialEvg:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_MATERIAL_EVG'
+      return:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_RETURN'
+      wmdvex:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_WMDVEX'
+      wmdvsx:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_WMDVSX'
+  SAP_BAPI_MATERIAL_AVAILABILITY_MATERIAL_EVG:
+    type: object
+    properties:
+      materialExt:
+        maxLength: 40
+        type: string
+      materialVers:
+        maxLength: 10
+        type: string
+      materialGuid:
+        maxLength: 32
+        type: string
+  SAP_BAPI_MATERIAL_AVAILABILITY_RETURN:
+    type: object
+    properties:
+      type:
+        maxLength: 1
+        type: string
+      code:
+        maxLength: 5
+        type: string
+      message:
+        maxLength: 220
+        type: string
+      logNo:
+        maxLength: 20
+        type: string
+      logMsgNo:
+        maxLength: 6
+        type: string
+      messageV1:
+        maxLength: 50
+        type: string
+      messageV2:
+        maxLength: 50
+        type: string
+      messageV3:
+        maxLength: 50
+        type: string
+      messageV4:
+        maxLength: 50
+        type: string
+  SAP_BAPI_MATERIAL_AVAILABILITY_WMDVEX:
+    type: object
+    properties:
+      bdcnt:
+        maxLength: 5
+        type: string
+      reqDate:
+        format: date-time
+        type: string
+      reqQty:
+        maxLength: 7
+        type: string
+      comDate:
+        format: date-time
+        type: string
+      comQty:
+        maxLength: 7
+        type: string
+  SAP_BAPI_MATERIAL_AVAILABILITY_WMDVSX:
+    type: object
+    properties:
+      reqDate:
+        format: date-time
+        type: string
+      reqQty:
+        maxLength: 7
+        type: string
+      delkz:
+        maxLength: 2
+        type: string
+      yline:
+        maxLength: 4
+        type: string
+  SAP_BAPI_MATERIAL_AVAILABILITY_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/SAP_BAPI_MATERIAL_AVAILABILITY_RFC'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP_ZSCH_EnosixMatSync_Search_EnosixMatSync_SC:
+    type: object
+    properties:
+      searchparams:
+        $ref: '#/definitions/SAP_ZSCH_EnosixMatSync_Search_SEARCHPARAMS'
+      materiaL_TYPE:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_ZSCH_EnosixMatSync_Search_MATERIAL_TYPE'
+      materiaL_GROUP:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_ZSCH_EnosixMatSync_Search_MATERIAL_GROUP'
+      division:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_ZSCH_EnosixMatSync_Search_DIVISION'
+      pagingOptions:
+        $ref: '#/definitions/PagingOptions'
+  SAP_ZSCH_EnosixMatSync_Search_SEARCHPARAMS:
+    type: object
+    properties:
+      dateFrom:
+        format: date-time
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+  SAP_ZSCH_EnosixMatSync_Search_MATERIAL_TYPE:
+    type: object
+    properties:
+      materialType:
+        maxLength: 4
+        type: string
+  SAP_ZSCH_EnosixMatSync_Search_MATERIAL_GROUP:
+    type: object
+    properties:
+      materialGroup:
+        maxLength: 9
+        type: string
+  SAP_ZSCH_EnosixMatSync_Search_DIVISION:
+    type: object
+    properties:
+      division:
+        maxLength: 2
+        type: string
+  SAP_ZSCH_EnosixMatSync_Search_EnosixMatSync_SR:
+    type: object
+    properties:
+      results:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP_ZSCH_EnosixMatSync_Search_SEARCHRESULT'
+      pagingInfo:
+        $ref: '#/definitions/PagingInfo'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP_ZSCH_EnosixMatSync_Search_SEARCHRESULT:
+    type: object
+    properties:
+      deleteIndicator:
+        type: boolean
+      configurableMaterial:
+        type: boolean
+      materialType:
+        maxLength: 4
+        type: string
+      materialTypeDescription:
+        maxLength: 25
+        type: string
+      division:
+        maxLength: 2
+        type: string
+      divisionDescription:
+        maxLength: 20
+        type: string
+      materialGroup:
+        maxLength: 9
+        type: string
+      materialGroupDescription:
+        maxLength: 20
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      materialDescription:
+        maxLength: 40
+        type: string
+      baseUnitOfMeasure:
+        maxLength: 3
+        type: string
+      salesUnit:
+        maxLength: 3
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+      distChainStatus:
+        maxLength: 2
+        type: string
+      distChainStatusDate:
+        format: date-time
+        type: string
+      weightUnit:
+        maxLength: 3
+        type: string
+      productHierarchy:
+        maxLength: 18
+        type: string
+      productHierarchyDescription:
+        maxLength: 40
+        type: string
+      productHierarchyLevel1:
+        maxLength: 18
+        type: string
+      productHierarchyLevel1Description:
+        maxLength: 40
+        type: string
+      productHierarchyLevel2:
+        maxLength: 18
+        type: string
+      productHierarchyLevel2Description:
+        maxLength: 40
+        type: string
+      productHierarchyLevel3:
+        maxLength: 18
+        type: string
+      productHierarchyLevel3Description:
+        maxLength: 40
+        type: string
+      ztesT1:
+        maxLength: 10
+        type: string
+      ztesT2:
+        maxLength: 10
+        type: string
+      oldMaterialNumber:
+        maxLength: 18
+        type: string
+  SAP__EnosixMatSync_Search_EnosixMatSync_SC:
+    type: object
+    properties:
+      searchparams:
+        $ref: '#/definitions/SAP__EnosixMatSync_Search_SEARCHPARAMS'
+      materiaL_TYPE:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMatSync_Search_MATERIAL_TYPE'
+      materiaL_GROUP:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMatSync_Search_MATERIAL_GROUP'
+      division:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMatSync_Search_DIVISION'
+      pagingOptions:
+        $ref: '#/definitions/PagingOptions'
+  SAP__EnosixMatSync_Search_SEARCHPARAMS:
+    type: object
+    properties:
+      dateFrom:
+        format: date-time
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+  SAP__EnosixMatSync_Search_MATERIAL_TYPE:
+    type: object
+    properties:
+      materialType:
+        maxLength: 4
+        type: string
+  SAP__EnosixMatSync_Search_MATERIAL_GROUP:
+    type: object
+    properties:
+      materialGroup:
+        maxLength: 9
+        type: string
+  SAP__EnosixMatSync_Search_DIVISION:
+    type: object
+    properties:
+      division:
+        maxLength: 2
+        type: string
+  SAP__EnosixMatSync_Search_EnosixMatSync_SR:
+    type: object
+    properties:
+      results:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMatSync_Search_SEARCHRESULT'
+      pagingInfo:
+        $ref: '#/definitions/PagingInfo'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP__EnosixMatSync_Search_SEARCHRESULT:
+    type: object
+    properties:
+      deleteIndicator:
+        type: boolean
+      configurableMaterial:
+        type: boolean
+      materialType:
+        maxLength: 4
+        type: string
+      materialTypeDescription:
+        maxLength: 25
+        type: string
+      division:
+        maxLength: 2
+        type: string
+      divisionDescription:
+        maxLength: 20
+        type: string
+      materialGroup:
+        maxLength: 9
+        type: string
+      materialGroupDescription:
+        maxLength: 20
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      materialDescription:
+        maxLength: 40
+        type: string
+      baseUnitOfMeasure:
+        maxLength: 3
+        type: string
+      salesUnit:
+        maxLength: 3
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+      distChainStatus:
+        maxLength: 2
+        type: string
+      distChainStatusDate:
+        format: date-time
+        type: string
+      weightUnit:
+        maxLength: 3
+        type: string
+      productHierarchy:
+        maxLength: 18
+        type: string
+      productHierarchyDescription:
+        maxLength: 40
+        type: string
+      productHierarchyLevel1:
+        maxLength: 18
+        type: string
+      productHierarchyLevel1Description:
+        maxLength: 40
+        type: string
+      productHierarchyLevel2:
+        maxLength: 18
+        type: string
+      productHierarchyLevel2Description:
+        maxLength: 40
+        type: string
+      productHierarchyLevel3:
+        maxLength: 18
+        type: string
+      productHierarchyLevel3Description:
+        maxLength: 40
+        type: string
+      oldMaterialNumber:
+        maxLength: 18
+        type: string
+  SAP__EnosixMaterial_Search_EnosixMaterial_SC:
+    type: object
+    properties:
+      searchparams:
+        $ref: '#/definitions/SAP__EnosixMaterial_Search_SEARCHPARAMS'
+      materiaL_TYPE:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMaterial_Search_MATERIAL_TYPE'
+      producT_ATTRIB:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMaterial_Search_PRODUCT_ATTRIB'
+      pagingOptions:
+        $ref: '#/definitions/PagingOptions'
+  SAP__EnosixMaterial_Search_SEARCHPARAMS:
+    type: object
+    properties:
+      materialNumberFrom:
+        maxLength: 18
+        type: string
+      materialNumberTo:
+        maxLength: 18
+        type: string
+      materialDescription:
+        maxLength: 40
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+      materialGroup:
+        maxLength: 9
+        type: string
+      productHierarchy:
+        maxLength: 18
+        type: string
+      fromCreateDate:
+        format: date-time
+        type: string
+      toCreateDate:
+        format: date-time
+        type: string
+      fromChangeDate:
+        format: date-time
+        type: string
+      toChangeDate:
+        format: date-time
+        type: string
+      searchText:
+        maxLength: 255
+        type: string
+  SAP__EnosixMaterial_Search_MATERIAL_TYPE:
+    type: object
+    properties:
+      materialType:
+        maxLength: 4
+        type: string
+  SAP__EnosixMaterial_Search_PRODUCT_ATTRIB:
+    type: object
+    properties:
+      productAttribute:
+        maxLength: 50
+        type: string
+  SAP__EnosixMaterial_Search_EnosixMaterial_SR:
+    type: object
+    properties:
+      results:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixMaterial_Search_SEARCHRESULT'
+      pagingInfo:
+        $ref: '#/definitions/PagingInfo'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP__EnosixMaterial_Search_SEARCHRESULT:
+    type: object
+    properties:
+      material:
+        maxLength: 18
+        type: string
+      materialDescription:
+        maxLength: 40
+        type: string
+      materialType:
+        maxLength: 4
+        type: string
+      materialTypeDescription:
+        maxLength: 25
+        type: string
+      materialGroup:
+        maxLength: 9
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+      productHierarchy:
+        maxLength: 18
+        type: string
+      productHierarchyDescription:
+        maxLength: 40
+        type: string
+      materialStatusDescription:
+        maxLength: 25
+        type: string
+      creationDate:
+        format: date-time
+        type: string
+      changeDate:
+        format: date-time
+        type: string
+      alternateUnitOfMeasure:
+        maxLength: 3
+        type: string
+      numeratorForConversion:
+        format: double
+        type: number
+      denominatorForConversion:
+        format: double
+        type: number
+      quotient:
+        format: double
+        type: number
+      baseUnitOfMeasure:
+        maxLength: 3
+        type: string
+      baseUoMDescription:
+        maxLength: 30
+        type: string
+      configurableMaterial:
+        type: boolean
+  SAP__EnosixSalesDocument_Detail_EnosixSalesDocument:
+    type: object
+    properties:
+      salesDocument:
+        maxLength: 10
+        type: string
+      soldToParty:
+        maxLength: 10
+        type: string
+      soldToPartyText:
+        maxLength: 255
+        type: string
+      customerPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      customerPurchaseOrderDate:
+        format: date-time
+        type: string
+      netOrderValue:
+        format: double
+        type: number
+      taxAmount:
+        format: double
+        type: number
+      salesDocumentCurrency:
+        maxLength: 5
+        type: string
+      billingPlan:
+        maxLength: 10
+        type: string
+      referenceDocument:
+        maxLength: 10
+        type: string
+      referenceDocumentCategory:
+        maxLength: 1
+        type: string
+      documentCategory:
+        maxLength: 1
+        type: string
+      documentCategoryDescription:
+        maxLength: 80
+        type: string
+      transactionGroup:
+        maxLength: 1
+        type: string
+      transactionGroupDescription:
+        maxLength: 80
+        type: string
+      sales:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_SALES'
+      shipping:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_SHIPPING'
+      billing:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_BILLING'
+      accounting:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ACCOUNTING'
+      conditions:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_CONDITIONS'
+      accounT_ASSIGNMENT:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ACCOUNT_ASSIGNMENT'
+      partners:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_PARTNERS'
+      texts:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_TEXTS'
+      orderdata:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ORDERDATA'
+      status:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_STATUS'
+      additionaL_DATA_A:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ADDITIONAL_DATA_A'
+      items:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ITEMS'
+      itemS_SCHEDULE:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ITEMS_SCHEDULE'
+      itemS_TEXT:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ITEMS_TEXT'
+      materiaL_UOM:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_MATERIAL_UOM'
+      ccard:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_CCARD'
+      itemS_ACTION:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ITEMS_ACTION'
+      ordeR_ACTION:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ORDER_ACTION'
+      itemS_CONFIG:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_ITEMS_CONFIG'
+      incompletioN_LOG:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_INCOMPLETION_LOG'
+      bilL_PLAN:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_BILL_PLAN'
+      billinG_PLAN_DATES:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_BILLING_PLAN_DATES'
+  SAP__EnosixSalesDocument_Detail_SALES:
+    type: object
+    properties:
+      salesDocumentType:
+        maxLength: 4
+        type: string
+      salesDocumentTypeInternal:
+        maxLength: 4
+        type: string
+      salesDocumentTypeDescription:
+        maxLength: 20
+        type: string
+      salesOrganization:
+        maxLength: 4
+        type: string
+      salesOrganizationName:
+        maxLength: 20
+        type: string
+      distributionChannel:
+        maxLength: 2
+        type: string
+      distributionChannelName:
+        maxLength: 20
+        type: string
+      division:
+        maxLength: 2
+        type: string
+      divisionName:
+        maxLength: 20
+        type: string
+      salesGroup:
+        maxLength: 3
+        type: string
+      salesGroupName:
+        maxLength: 20
+        type: string
+      salesOffice:
+        maxLength: 4
+        type: string
+      salesOfficeName:
+        maxLength: 20
+        type: string
+      createDate:
+        format: date-time
+        type: string
+      entryTime:
+        format: date-time
+        type: string
+      createdBy:
+        maxLength: 12
+        type: string
+      validFrom:
+        format: date-time
+        type: string
+      validTo:
+        format: date-time
+        type: string
+      salesDocumentVersionNumber:
+        maxLength: 12
+        type: string
+      warrantyDate:
+        format: date-time
+        type: string
+      orderReason:
+        maxLength: 3
+        type: string
+      orderReasonDescription:
+        maxLength: 40
+        type: string
+      agreedDeliveryTime:
+        maxLength: 3
+        type: string
+      agreedDeliveryTimeDescription:
+        maxLength: 20
+        type: string
+      salesDocumentCurrency:
+        maxLength: 5
+        type: string
+      exchangeRatePriceDetermination:
+        format: double
+        type: number
+      dateforPricingExchangeRate:
+        format: date-time
+        type: string
+      pricingProcedureInPricing:
+        maxLength: 6
+        type: string
+      pricingProcedureInPricingDesc:
+        maxLength: 30
+        type: string
+      customerGroup:
+        maxLength: 2
+        type: string
+      customerGroupName:
+        maxLength: 20
+        type: string
+      priceListType:
+        maxLength: 2
+        type: string
+      priceListTypeText:
+        maxLength: 20
+        type: string
+      usageIndicator:
+        maxLength: 3
+        type: string
+      usageIndicatorDescription:
+        maxLength: 20
+        type: string
+      priceGroup:
+        maxLength: 2
+        type: string
+      priceGroupDescription:
+        maxLength: 20
+        type: string
+      salesDistrict:
+        maxLength: 6
+        type: string
+      salesDistrictName:
+        maxLength: 20
+        type: string
+      requestedDeliveryDate:
+        format: date-time
+        type: string
+      deliveryBlock:
+        maxLength: 2
+        type: string
+      deliveryBlockDescription:
+        maxLength: 20
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      billingBlockDescription:
+        maxLength: 20
+        type: string
+      termsofPaymentKey:
+        maxLength: 4
+        type: string
+      termsofPaymentKeyDescription:
+        maxLength: 30
+        type: string
+      incotermsPart1:
+        maxLength: 3
+        type: string
+      incotermsPart1Description:
+        maxLength: 30
+        type: string
+      incotermsPart2:
+        maxLength: 28
+        type: string
+  SAP__EnosixSalesDocument_Detail_SHIPPING:
+    type: object
+    properties:
+      shipToParty:
+        maxLength: 10
+        type: string
+      shipToPartyText:
+        maxLength: 255
+        type: string
+      unloadingPoint:
+        maxLength: 25
+        type: string
+      receivingPoint:
+        maxLength: 25
+        type: string
+      departmentNumber:
+        maxLength: 4
+        type: string
+      departmentNumberDescription:
+        maxLength: 20
+        type: string
+      deliveryBlock:
+        maxLength: 2
+        type: string
+      deliveryBlockDescription:
+        maxLength: 20
+        type: string
+      shippingConditions:
+        maxLength: 2
+        type: string
+      shippingConditionsDescription:
+        maxLength: 20
+        type: string
+      dangerousGoodsMngmntProfile:
+        maxLength: 3
+        type: string
+      dangerousGoodsMngmntProfDesc:
+        maxLength: 132
+        type: string
+      meansofTransportType:
+        maxLength: 4
+        type: string
+      meansofTransportTypDescription:
+        maxLength: 20
+        type: string
+      meansofTransport:
+        maxLength: 18
+        type: string
+      meansofTransportDescription:
+        maxLength: 40
+        type: string
+      relevantforPODprocessing:
+        type: boolean
+      completeDeliveryDefined:
+        type: boolean
+      orderCombinationIndicator:
+        type: boolean
+      documentContainsDangerousGoods:
+        maxLength: 1
+        type: string
+      shippingType:
+        maxLength: 2
+        type: string
+      shippingTypeDescription:
+        maxLength: 20
+        type: string
+      specialProcessing:
+        maxLength: 4
+        type: string
+      specialProcessingDescription:
+        maxLength: 40
+        type: string
+      totalWeight:
+        format: double
+        type: number
+      weightUnit:
+        maxLength: 3
+        type: string
+      netweight:
+        format: double
+        type: number
+      volume:
+        format: double
+        type: number
+      volumeUnit:
+        maxLength: 3
+        type: string
+  SAP__EnosixSalesDocument_Detail_BILLING:
+    type: object
+    properties:
+      payer:
+        maxLength: 10
+        type: string
+      payerDisplayText:
+        maxLength: 255
+        type: string
+      incotermsPart1:
+        maxLength: 3
+        type: string
+      incotermsPart1Description:
+        maxLength: 30
+        type: string
+      incotermsPart2:
+        maxLength: 28
+        type: string
+      fixedValueDate:
+        format: date-time
+        type: string
+      termsofPaymentKey:
+        maxLength: 4
+        type: string
+      termsofPaymentKeyDescription:
+        maxLength: 30
+        type: string
+      additionalValueDays:
+        maxLength: 2
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      billingBlockDescription:
+        maxLength: 20
+        type: string
+      invoiceDates:
+        maxLength: 2
+        type: string
+      invoiceDatesText:
+        maxLength: 60
+        type: string
+      billingDate:
+        format: date-time
+        type: string
+      companyCodeToBeBilled:
+        maxLength: 4
+        type: string
+      companyCodeToBeBilledText:
+        maxLength: 50
+        type: string
+      dateOnWhichServicesRendered:
+        format: date-time
+        type: string
+      alternativeTaxClassification:
+        maxLength: 1
+        type: string
+      altTaxClassificationDescription:
+        maxLength: 20
+        type: string
+      taxDepartureCountry:
+        maxLength: 3
+        type: string
+      taxDepartureCountryName:
+        maxLength: 15
+        type: string
+      taxDestinationCountry:
+        maxLength: 3
+        type: string
+      taxDestinationCountryName:
+        maxLength: 15
+        type: string
+      triangularDeal:
+        type: boolean
+      paymentGuaranteeProcedure:
+        maxLength: 6
+        type: string
+      paymentGuaranteeProcedureDesc:
+        maxLength: 60
+        type: string
+      internalfinancialDocNumber:
+        maxLength: 10
+        type: string
+      depreciationPercentage:
+        format: double
+        type: number
+  SAP__EnosixSalesDocument_Detail_ACCOUNTING:
+    type: object
+    properties:
+      accountAssignmentGroup:
+        maxLength: 2
+        type: string
+      accountAssignmentGroupDesc:
+        maxLength: 20
+        type: string
+      paymentMethod:
+        maxLength: 1
+        type: string
+      paymentMethodDescription:
+        maxLength: 30
+        type: string
+      postingPeriod:
+        maxLength: 3
+        type: string
+      fiscalYear:
+        maxLength: 4
+        type: string
+      assignmentNumber:
+        maxLength: 18
+        type: string
+      exchangeRateforFIpostings:
+        format: double
+        type: number
+      dunningKey:
+        maxLength: 1
+        type: string
+      dunningKeyText:
+        maxLength: 50
+        type: string
+      dunningBlock:
+        maxLength: 1
+        type: string
+      dunningBlockText:
+        maxLength: 50
+        type: string
+      referenceDocumentNumber:
+        maxLength: 16
+        type: string
+  SAP__EnosixSalesDocument_Detail_CONDITIONS:
+    type: object
+    properties:
+      conditionNumber:
+        maxLength: 10
+        type: string
+      conditionItemNumber:
+        maxLength: 6
+        type: string
+      stepNumber:
+        maxLength: 3
+        type: string
+      conditionCounter:
+        maxLength: 2
+        type: string
+      conditionType:
+        maxLength: 4
+        type: string
+      conditionTypeName:
+        maxLength: 20
+        type: string
+      rate:
+        format: double
+        type: number
+      rateUnit:
+        maxLength: 5
+        type: string
+      conditionPricingUnit:
+        format: double
+        type: number
+      conditionUnit:
+        maxLength: 3
+        type: string
+      conditionUnitInternal:
+        maxLength: 3
+        type: string
+      conditionValue:
+        format: double
+        type: number
+      currencyKey:
+        maxLength: 5
+        type: string
+      condValueforCumulationFields:
+        format: double
+        type: number
+      condCurrencyforCumulationFlds:
+        maxLength: 5
+        type: string
+      conditionStatistics:
+        type: boolean
+      calculationType:
+        maxLength: 1
+        type: string
+      manualEntries:
+        maxLength: 1
+        type: string
+      conditionControl:
+        maxLength: 1
+        type: string
+      conditionOrigin:
+        maxLength: 1
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_ACCOUNT_ASSIGNMENT:
+    type: object
+    properties:
+      businessArea:
+        maxLength: 4
+        type: string
+      wbsElementInternal:
+        maxLength: 8
+        type: string
+      wbsElement:
+        maxLength: 24
+        type: string
+      wbsElementDescription:
+        maxLength: 40
+        type: string
+  SAP__EnosixSalesDocument_Detail_PARTNERS:
+    type: object
+    properties:
+      partnerFunction:
+        maxLength: 2
+        type: string
+      partnerFunctionInternal:
+        maxLength: 2
+        type: string
+      partnerFunctionName:
+        maxLength: 20
+        type: string
+      customerNumber:
+        maxLength: 10
+        type: string
+      vendor:
+        maxLength: 10
+        type: string
+      personnelNumber:
+        maxLength: 8
+        type: string
+      contactPersonNumber:
+        maxLength: 10
+        type: string
+      partnerName:
+        maxLength: 40
+        type: string
+      partnerName2:
+        maxLength: 40
+        type: string
+      houseNumber:
+        maxLength: 10
+        type: string
+      street:
+        maxLength: 60
+        type: string
+      city:
+        maxLength: 40
+        type: string
+      postalCode:
+        maxLength: 10
+        type: string
+      district:
+        maxLength: 35
+        type: string
+      region:
+        maxLength: 3
+        type: string
+      regionDescription:
+        maxLength: 20
+        type: string
+      country:
+        maxLength: 3
+        type: string
+      countryName:
+        maxLength: 50
+        type: string
+      timeZone:
+        maxLength: 6
+        type: string
+      timeZoneText:
+        maxLength: 30
+        type: string
+      transportationZone:
+        maxLength: 10
+        type: string
+      transportationZoneDescription:
+        maxLength: 20
+        type: string
+      poBox:
+        maxLength: 10
+        type: string
+      poBoxPostalCode:
+        maxLength: 10
+        type: string
+      companyPostalCode:
+        maxLength: 10
+        type: string
+      language:
+        maxLength: 1
+        type: string
+      languageDesc:
+        maxLength: 16
+        type: string
+      telephoneNumber:
+        maxLength: 30
+        type: string
+      telephoneNumberExtension:
+        maxLength: 10
+        type: string
+      mobileNumber:
+        maxLength: 30
+        type: string
+      faxNumber:
+        maxLength: 30
+        type: string
+      faxNumberExtension:
+        maxLength: 10
+        type: string
+      eMailAddress:
+        maxLength: 241
+        type: string
+      defaultCommunicationMethod:
+        maxLength: 3
+        type: string
+      defaultCommunicationMethodDescription:
+        maxLength: 20
+        type: string
+      extension1:
+        maxLength: 40
+        type: string
+      extension2:
+        maxLength: 40
+        type: string
+      addressNotes:
+        maxLength: 50
+        type: string
+      itemNumber:
+        maxLength: 6
+        type: string
+      taxJurisdiction:
+        maxLength: 15
+        type: string
+      partneR_CHANGED:
+        type: boolean
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_TEXTS:
+    type: object
+    properties:
+      textID:
+        maxLength: 4
+        type: string
+      textLanguage:
+        maxLength: 1
+        type: string
+      textIDDescription:
+        maxLength: 30
+        type: string
+      text:
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_ORDERDATA:
+    type: object
+    properties:
+      customerPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      customerPurchaseOrderDate:
+        format: date-time
+        type: string
+      customerPurchaseOrderType:
+        maxLength: 4
+        type: string
+      purchaseOrderNumberSupplement:
+        maxLength: 4
+        type: string
+      lastCustomerContactDate:
+        format: date-time
+        type: string
+      numberOfContactsFromCustomer:
+        format: double
+        type: number
+      ordererName:
+        maxLength: 35
+        type: string
+      collectiveNumber:
+        maxLength: 10
+        type: string
+      yourReference:
+        maxLength: 12
+        type: string
+      telephoneNumber:
+        maxLength: 16
+        type: string
+      shipToPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      shipToPODate:
+        format: date-time
+        type: string
+      shipToPurchaseOrderType:
+        maxLength: 4
+        type: string
+      shipToCharacter:
+        maxLength: 12
+        type: string
+  SAP__EnosixSalesDocument_Detail_STATUS:
+    type: object
+    properties:
+      overallStatusDescription:
+        maxLength: 20
+        type: string
+      rejectionStatusDescription:
+        maxLength: 20
+        type: string
+      deliveryStatusDescription:
+        maxLength: 20
+        type: string
+      creditStatusDescription:
+        maxLength: 20
+        type: string
+      overalBlockedStatusDescription:
+        maxLength: 20
+        type: string
+      dataCompleteDescription:
+        maxLength: 20
+        type: string
+      headerDeliveryDataCompleteDesc:
+        maxLength: 20
+        type: string
+      headerBillingCompleteDesc:
+        maxLength: 20
+        type: string
+      itemDataCompleteDesc:
+        maxLength: 20
+        type: string
+      itemDeliveryDataCompleteDesc:
+        maxLength: 20
+        type: string
+      itemBillingDataCompleteDesc:
+        maxLength: 20
+        type: string
+  SAP__EnosixSalesDocument_Detail_ADDITIONAL_DATA_A:
+    type: object
+    properties:
+      customerGroup1:
+        maxLength: 3
+        type: string
+      customerGroup1Description:
+        maxLength: 20
+        type: string
+      customerGroup2:
+        maxLength: 3
+        type: string
+      customerGroup2Description:
+        maxLength: 20
+        type: string
+      customerGroup3:
+        maxLength: 3
+        type: string
+      customerGroup3Description:
+        maxLength: 20
+        type: string
+      customerGroup4:
+        maxLength: 3
+        type: string
+      customerGroup4Description:
+        maxLength: 20
+        type: string
+      customerGroup5:
+        maxLength: 3
+        type: string
+      customerGroup5Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup1:
+        maxLength: 2
+        type: string
+      customerConditionGroup1Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup2:
+        maxLength: 2
+        type: string
+      customerConditionGroup2Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup3:
+        maxLength: 2
+        type: string
+      customerConditionGroup3Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup4:
+        maxLength: 2
+        type: string
+      customerConditionGroup4Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup5:
+        maxLength: 2
+        type: string
+      customerConditionGroup5Description:
+        maxLength: 20
+        type: string
+  SAP__EnosixSalesDocument_Detail_ITEMS:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      orderQuantity:
+        format: double
+        type: number
+      salesUnit:
+        maxLength: 3
+        type: string
+      salesUnitInternal:
+        maxLength: 3
+        type: string
+      salesUnitDescription:
+        maxLength: 20
+        type: string
+      taxAmount:
+        format: double
+        type: number
+      itemDescription:
+        maxLength: 40
+        type: string
+      customerMaterialNumber:
+        maxLength: 35
+        type: string
+      itemCategory:
+        maxLength: 4
+        type: string
+      itemCategoryDescription:
+        maxLength: 20
+        type: string
+      dangerousGoodsIndicator:
+        maxLength: 3
+        type: string
+      higherLevelItemNumber:
+        maxLength: 6
+        type: string
+      scheduleLineDate:
+        format: date-time
+        type: string
+      plant:
+        maxLength: 4
+        type: string
+      plantName:
+        maxLength: 30
+        type: string
+      batchNumber:
+        maxLength: 10
+        type: string
+      conditionType:
+        maxLength: 4
+        type: string
+      rate:
+        format: double
+        type: number
+      rateUnit:
+        maxLength: 5
+        type: string
+      netItemPrice:
+        format: double
+        type: number
+      conditionPricingUnit:
+        format: double
+        type: number
+      conditionUnit:
+        maxLength: 3
+        type: string
+      conditionUnitDescription:
+        maxLength: 20
+        type: string
+      netOrderValue:
+        format: double
+        type: number
+      salesDocumentCurrency:
+        maxLength: 5
+        type: string
+      conditionScaleQuantity:
+        format: double
+        type: number
+      reasonForRejection:
+        maxLength: 2
+        type: string
+      customerPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      customerPurchaseOrderItemNumber:
+        maxLength: 6
+        type: string
+      deliveryBlockStatus:
+        maxLength: 1
+        type: string
+      deliveryBlockStatusDescription:
+        maxLength: 20
+        type: string
+      billingBlockStatus:
+        maxLength: 1
+        type: string
+      billingBlockStatusDescription:
+        maxLength: 20
+        type: string
+      agreedDeliveryTime:
+        maxLength: 3
+        type: string
+      agreedDeliveryTimeDescription:
+        maxLength: 20
+        type: string
+      materialgroup1:
+        maxLength: 3
+        type: string
+      materialgroup1Description:
+        maxLength: 40
+        type: string
+      materialgroup2:
+        maxLength: 3
+        type: string
+      materialgroup2Description:
+        maxLength: 40
+        type: string
+      materialgroup3:
+        maxLength: 3
+        type: string
+      materialgroup3Description:
+        maxLength: 40
+        type: string
+      materialgroup4:
+        maxLength: 3
+        type: string
+      materialgroup4Description:
+        maxLength: 40
+        type: string
+      materialgroup5:
+        maxLength: 3
+        type: string
+      materialgroup5Description:
+        maxLength: 40
+        type: string
+      customerConditionGroup1:
+        maxLength: 2
+        type: string
+      customerConditionGroup1Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup2:
+        maxLength: 2
+        type: string
+      customerConditionGroup2Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup3:
+        maxLength: 2
+        type: string
+      customerConditionGroup3Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup4:
+        maxLength: 2
+        type: string
+      customerConditionGroup4Description:
+        maxLength: 20
+        type: string
+      customerConditionGroup5:
+        maxLength: 2
+        type: string
+      customerConditionGroup5Description:
+        maxLength: 20
+        type: string
+      productHierarchy:
+        type: string
+      materialGroupHierarchy1:
+        maxLength: 18
+        type: string
+      materialGroupHierarchy2:
+        maxLength: 18
+        type: string
+      division:
+        maxLength: 2
+        type: string
+      divisionName:
+        maxLength: 20
+        type: string
+      wbsElementInternal:
+        maxLength: 8
+        type: string
+      wbsElement:
+        maxLength: 24
+        type: string
+      wbsElementDescription:
+        maxLength: 40
+        type: string
+      orderNumber:
+        maxLength: 12
+        type: string
+      profitCenter:
+        maxLength: 10
+        type: string
+      materialPricingGroup:
+        maxLength: 2
+        type: string
+      materialPricingGroupDescription:
+        maxLength: 20
+        type: string
+      customerGroup:
+        maxLength: 2
+        type: string
+      customerGroupName:
+        maxLength: 20
+        type: string
+      priceGroup:
+        maxLength: 2
+        type: string
+      priceGroupDescription:
+        maxLength: 20
+        type: string
+      priceListType:
+        maxLength: 2
+        type: string
+      priceListTypeText:
+        maxLength: 20
+        type: string
+      salesDistrict:
+        maxLength: 6
+        type: string
+      salesDistrictName:
+        maxLength: 20
+        type: string
+      customerPurchaseOrderDate:
+        format: date-time
+        type: string
+      customerPurchaseOrderType:
+        maxLength: 4
+        type: string
+      customerPurchaseOrderTypeDesc:
+        maxLength: 20
+        type: string
+      shipToPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      shipToPODate:
+        format: date-time
+        type: string
+      shipToPurchaseOrderType:
+        maxLength: 4
+        type: string
+      shipToPurchaseOrderTypeDesc:
+        maxLength: 20
+        type: string
+      shipToPurchaseOrderItemNumber:
+        maxLength: 6
+        type: string
+      storageLocation:
+        maxLength: 4
+        type: string
+      storageLocationDescription:
+        maxLength: 16
+        type: string
+      deliveryPriority:
+        maxLength: 2
+        type: string
+      deliveryPriorityDescription:
+        maxLength: 20
+        type: string
+      shippingPoint:
+        maxLength: 4
+        type: string
+      shippingPointDescription:
+        maxLength: 30
+        type: string
+      partialDelivery:
+        maxLength: 1
+        type: string
+      partialDeliveryDescription:
+        maxLength: 60
+        type: string
+      route:
+        maxLength: 6
+        type: string
+      routeDescription:
+        maxLength: 40
+        type: string
+      netweight:
+        format: double
+        type: number
+      weightUnit:
+        maxLength: 3
+        type: string
+      weightUnitInternal:
+        maxLength: 3
+        type: string
+      grossWeight:
+        format: double
+        type: number
+      volume:
+        format: double
+        type: number
+      volumeUnit:
+        maxLength: 3
+        type: string
+      volumeUnitInternal:
+        maxLength: 3
+        type: string
+      incotermsPart1:
+        maxLength: 3
+        type: string
+      incotermsPart1Description:
+        maxLength: 30
+        type: string
+      incotermsPart2:
+        maxLength: 28
+        type: string
+      termsofPaymentKey:
+        maxLength: 4
+        type: string
+      termsofPaymentKeyDescription:
+        maxLength: 30
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      billingBlockDescription:
+        maxLength: 20
+        type: string
+      billingRelevant:
+        maxLength: 1
+        type: string
+      billingRelevantDescription:
+        maxLength: 60
+        type: string
+      billingPlanInHeaderIndicator:
+        maxLength: 1
+        type: string
+      overallStatusDescription:
+        maxLength: 20
+        type: string
+      dataCompleteDescription:
+        maxLength: 20
+        type: string
+      exchangeRatePriceDetermination:
+        format: double
+        type: number
+      dateforPricingExchangeRate:
+        format: date-time
+        type: string
+      materialEntered:
+        maxLength: 18
+        type: string
+      usageIndicator:
+        maxLength: 3
+        type: string
+      usageIndicatorDescription:
+        maxLength: 20
+        type: string
+      pricingReferenceMaterial:
+        maxLength: 18
+        type: string
+      costingSheet:
+        maxLength: 6
+        type: string
+      costingSheetDescription:
+        maxLength: 30
+        type: string
+      overheadkey:
+        maxLength: 6
+        type: string
+      receivingPoint:
+        maxLength: 25
+        type: string
+      departmentNumber:
+        maxLength: 4
+        type: string
+      departmentNumberDescription:
+        maxLength: 20
+        type: string
+      maxNumberOfPartialDeliveriesAllowed:
+        format: double
+        type: number
+      overdeliveryToleranceLimit:
+        format: double
+        type: number
+      underdeliveryToleranceLimit:
+        format: double
+        type: number
+      fixedValueDate:
+        format: date-time
+        type: string
+      additionalValueDays:
+        maxLength: 2
+        type: string
+      invoiceDates:
+        maxLength: 2
+        type: string
+      invoiceDatesText:
+        maxLength: 60
+        type: string
+      billingDate:
+        format: date-time
+        type: string
+      dateOnWhichServicesRendered:
+        format: date-time
+        type: string
+      accountAssignmentGroup:
+        maxLength: 2
+        type: string
+      accountAssignmentGroupDescription:
+        maxLength: 20
+        type: string
+      componentQuantity:
+        format: double
+        type: number
+      baseUnitOfMeasure:
+        maxLength: 3
+        type: string
+      iuidRelevant:
+        maxLength: 1
+        type: string
+      deliveryBlock:
+        maxLength: 2
+        type: string
+      deliveryBlockDescription:
+        maxLength: 20
+        type: string
+      itemReferenceDocument:
+        maxLength: 10
+        type: string
+      itemReferenceDocumentItNumber:
+        maxLength: 6
+        type: string
+      itemReferenceDocumentCtegory:
+        maxLength: 1
+        type: string
+      costInDocCurrency:
+        format: double
+        type: number
+      configurableMaterial:
+        type: boolean
+      alternativeForItem:
+        maxLength: 6
+        type: string
+      billOfMaterial:
+        maxLength: 8
+        type: string
+      boM_COUNT:
+        maxLength: 3
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_ITEMS_SCHEDULE:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      scheduleLineNumber:
+        maxLength: 4
+        type: string
+      scheduleLineDate:
+        format: date-time
+        type: string
+      orderQuantity:
+        format: double
+        type: number
+      roundedQuantity:
+        format: double
+        type: number
+      confirmedQuantity:
+        format: double
+        type: number
+      salesUnit:
+        maxLength: 3
+        type: string
+      salesUnitInternal:
+        maxLength: 3
+        type: string
+      deliveryBlock:
+        maxLength: 2
+        type: string
+      deliveryBlockDescription:
+        maxLength: 20
+        type: string
+      deliveredQuantity:
+        format: double
+        type: number
+      scheduleLineCategory:
+        maxLength: 2
+        type: string
+      scheduleLineCategoryDescription:
+        maxLength: 20
+        type: string
+      purchaseRequisitionNumber:
+        maxLength: 10
+        type: string
+      purchaseRequisitionItemNumber:
+        maxLength: 5
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_ITEMS_TEXT:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      textID:
+        maxLength: 4
+        type: string
+      textLanguage:
+        maxLength: 1
+        type: string
+      textIDDescription:
+        maxLength: 30
+        type: string
+      text:
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_MATERIAL_UOM:
+    type: object
+    properties:
+      material:
+        maxLength: 18
+        type: string
+      alternateUnitOfMeasure:
+        maxLength: 3
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_CCARD:
+    type: object
+    properties:
+      billingPlan:
+        maxLength: 10
+        type: string
+      billingPlanItem:
+        maxLength: 6
+        type: string
+      creditCardType:
+        maxLength: 4
+        type: string
+      creditCardNumber:
+        maxLength: 25
+        type: string
+      paymentCardSuffix:
+        maxLength: 10
+        type: string
+      validToDate:
+        format: date-time
+        type: string
+      cardholderName:
+        maxLength: 40
+        type: string
+      billAmount:
+        format: double
+        type: number
+      authorizedAmount:
+        format: double
+        type: number
+      orderCurrency:
+        maxLength: 5
+        type: string
+      authorizationDate:
+        format: date-time
+        type: string
+      authorizationTime:
+        format: date-time
+        type: string
+      authorizationNumber:
+        maxLength: 10
+        type: string
+      settlement:
+        type: boolean
+      clearingHouseAuthCode:
+        maxLength: 15
+        type: string
+      authorizationCheckResponse:
+        maxLength: 1
+        type: string
+      statusFromExternalSystem:
+        maxLength: 1
+        type: string
+      preauthorization:
+        type: boolean
+      amountChanged:
+        type: boolean
+      authorizationType:
+        maxLength: 1
+        type: string
+      billingPlanAuthorization:
+        maxLength: 6
+        type: string
+      resultCode:
+        maxLength: 4
+        type: string
+      resultText:
+        maxLength: 40
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_ITEMS_ACTION:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      itemChanged:
+        type: boolean
+      itemDeleted:
+        type: boolean
+      itemAdded:
+        type: boolean
+      priceOverride:
+        type: boolean
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_ORDER_ACTION:
+    type: object
+    properties:
+      referenceFlag:
+        type: boolean
+      referenceDocumentType:
+        maxLength: 4
+        type: string
+      referenceDocumentNumber:
+        maxLength: 10
+        type: string
+  SAP__EnosixSalesDocument_Detail_ITEMS_CONFIG:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      characteristicID:
+        maxLength: 10
+        type: string
+      characteristicName:
+        maxLength: 30
+        type: string
+      characteristicDescription:
+        maxLength: 30
+        type: string
+      characteristicValue:
+        maxLength: 30
+        type: string
+      characteristicValueDescription:
+        maxLength: 30
+        type: string
+      parT_OF_NO:
+        maxLength: 4
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_INCOMPLETION_LOG:
+    type: object
+    properties:
+      client:
+        maxLength: 3
+        type: string
+      salesDocument:
+        maxLength: 10
+        type: string
+      itemNumber:
+        maxLength: 6
+        type: string
+      scheduleLineNumber:
+        maxLength: 4
+        type: string
+      partnerFunction:
+        maxLength: 2
+        type: string
+      textID:
+        maxLength: 4
+        type: string
+      tableName:
+        maxLength: 30
+        type: string
+      fieldName:
+        maxLength: 30
+        type: string
+      incompletionProcedure:
+        maxLength: 2
+        type: string
+      statusGroup:
+        maxLength: 2
+        type: string
+      description:
+        maxLength: 40
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_BILL_PLAN:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      billingPlan:
+        maxLength: 10
+        type: string
+      fptyp:
+        maxLength: 1
+        type: string
+      fpart:
+        maxLength: 2
+        type: string
+      fparT_TEXT:
+        maxLength: 30
+        type: string
+      poDate:
+        format: date-time
+        type: string
+      endat:
+        format: date-time
+        type: string
+      pspnr:
+        maxLength: 8
+        type: string
+      perio:
+        maxLength: 2
+        type: string
+      periO_TEXT:
+        maxLength: 60
+        type: string
+      rfpln:
+        maxLength: 10
+        type: string
+      vfptt:
+        maxLength: 2
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      periodic:
+        type: boolean
+      changed:
+        type: boolean
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_BILLING_PLAN_DATES:
+    type: object
+    properties:
+      billingPlan:
+        maxLength: 10
+        type: string
+      itemNumber:
+        maxLength: 6
+        type: string
+      billingPlanItem:
+        maxLength: 6
+        type: string
+      afdat:
+        format: date-time
+        type: string
+      tetxt:
+        maxLength: 4
+        type: string
+      tebez:
+        maxLength: 40
+        type: string
+      mlbez:
+        maxLength: 5
+        type: string
+      fproz:
+        format: double
+        type: number
+      fakwr:
+        format: double
+        type: number
+      currencyKey:
+        maxLength: 5
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      fareg:
+        maxLength: 1
+        type: string
+      fksaf:
+        maxLength: 1
+        type: string
+      termsofPaymentKey:
+        maxLength: 4
+        type: string
+      fpttp:
+        maxLength: 2
+        type: string
+      fkarv:
+        maxLength: 4
+        type: string
+      exchangeRateforFIpostings:
+        format: double
+        type: number
+      mlstn:
+        maxLength: 12
+        type: string
+      fpfix:
+        maxLength: 1
+        type: string
+      billingDate:
+        format: date-time
+        type: string
+      nfdat:
+        format: date-time
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__EnosixSalesDocument_Detail_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/SAP__EnosixSalesDocument_Detail_EnosixSalesDocument'
+      key:
+        type: string
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP__SFCISalesDocumentItem_Detail_SFCISalesDocumentItem:
+    type: object
+    properties:
+      itemNumber:
+        maxLength: 6
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      itemDescription:
+        maxLength: 40
+        type: string
+      batchNumber:
+        maxLength: 10
+        type: string
+      materialGroup:
+        maxLength: 9
+        type: string
+      materialGroupDescription:
+        maxLength: 20
+        type: string
+      itemCategory:
+        maxLength: 4
+        type: string
+      itemCategoryDescription:
+        maxLength: 20
+        type: string
+      higherLevelItemNumber:
+        maxLength: 6
+        type: string
+      reasonForRejection:
+        maxLength: 2
+        type: string
+      reasonForRejectionDescription:
+        maxLength: 40
+        type: string
+      productHierarchy:
+        maxLength: 18
+        type: string
+      orderQuantity:
+        format: double
+        type: number
+      salesUnit:
+        maxLength: 3
+        type: string
+      salesUnitDescription:
+        maxLength: 40
+        type: string
+      plant:
+        maxLength: 4
+        type: string
+      plantDescription:
+        maxLength: 40
+        type: string
+      storageLocation:
+        maxLength: 4
+        type: string
+      storageLocationDescription:
+        maxLength: 16
+        type: string
+      shippingPoint:
+        maxLength: 4
+        type: string
+      shippingPointDescription:
+        maxLength: 30
+        type: string
+      route:
+        maxLength: 6
+        type: string
+      routeDescription:
+        maxLength: 30
+        type: string
+      customerMaterialNumber:
+        maxLength: 35
+        type: string
+      netItemPrice:
+        format: double
+        type: number
+      netOrderValue:
+        format: double
+        type: number
+      taxAmount:
+        format: double
+        type: number
+      salesDocumentCurrency:
+        maxLength: 5
+        type: string
+      deliveryBlockStatus:
+        maxLength: 1
+        type: string
+      deliveryBlockStatusDescription:
+        maxLength: 20
+        type: string
+      billingBlockStatus:
+        maxLength: 1
+        type: string
+      billingBlockStatusDescription:
+        maxLength: 20
+        type: string
+      agreedDeliveryTime:
+        maxLength: 3
+        type: string
+      agreedDeliveryTimeDescription:
+        maxLength: 20
+        type: string
+      materialgroup1:
+        maxLength: 3
+        type: string
+      materialGroup1Description:
+        maxLength: 40
+        type: string
+      materialgroup2:
+        maxLength: 3
+        type: string
+      materialGroup2Description:
+        maxLength: 40
+        type: string
+      materialgroup3:
+        maxLength: 3
+        type: string
+      materialGroup3Description:
+        maxLength: 40
+        type: string
+      materialgroup4:
+        maxLength: 3
+        type: string
+      materialGroup4Description:
+        maxLength: 40
+        type: string
+      materialgroup5:
+        maxLength: 3
+        type: string
+      materialGroup5Description:
+        maxLength: 40
+        type: string
+      customerConditionGroup1:
+        maxLength: 2
+        type: string
+      customerConditionGroup1Description:
+        maxLength: 40
+        type: string
+      customerConditionGroup2:
+        maxLength: 2
+        type: string
+      customerConditionGroup2Description:
+        maxLength: 40
+        type: string
+      customerConditionGroup3:
+        maxLength: 2
+        type: string
+      customerConditionGroup3Description:
+        maxLength: 40
+        type: string
+      customerConditionGroup4:
+        maxLength: 2
+        type: string
+      customerConditionGroup4Description:
+        maxLength: 40
+        type: string
+      customerConditionGroup5:
+        maxLength: 40
+        type: string
+      customerConditionGroup5Description:
+        maxLength: 20
+        type: string
+      wbsElementInternal:
+        maxLength: 8
+        type: string
+      wbsElement:
+        maxLength: 24
+        type: string
+      wbsElementDescription:
+        maxLength: 40
+        type: string
+      orderNumber:
+        maxLength: 12
+        type: string
+      profitCenter:
+        maxLength: 10
+        type: string
+      materialPricingGroup:
+        maxLength: 2
+        type: string
+      materialPricingGroupDescription:
+        maxLength: 20
+        type: string
+      customerGroup:
+        maxLength: 2
+        type: string
+      customerGroupDescription:
+        maxLength: 20
+        type: string
+      priceGroup:
+        maxLength: 2
+        type: string
+      pricingGroupDescription:
+        maxLength: 20
+        type: string
+      priceListType:
+        maxLength: 2
+        type: string
+      priceListTypeDescription:
+        maxLength: 20
+        type: string
+      deliveryPriority:
+        maxLength: 2
+        type: string
+      deliveryPriorityDescription:
+        maxLength: 20
+        type: string
+      netweight:
+        format: double
+        type: number
+      weightUnit:
+        maxLength: 3
+        type: string
+      grossWeight:
+        format: double
+        type: number
+      volume:
+        format: double
+        type: number
+      volumeUnit:
+        maxLength: 3
+        type: string
+      incotermsPart1:
+        maxLength: 3
+        type: string
+      incotermsPart1Description:
+        maxLength: 30
+        type: string
+      incotermsPart2:
+        maxLength: 28
+        type: string
+      termsofPaymentKey:
+        maxLength: 4
+        type: string
+      paymentTermsDescription:
+        maxLength: 30
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      billingBlockDescription:
+        maxLength: 20
+        type: string
+      billingRelevant:
+        maxLength: 1
+        type: string
+      billingReleventDescription:
+        maxLength: 60
+        type: string
+      departmentNumber:
+        maxLength: 4
+        type: string
+      departmentNumberDescription:
+        maxLength: 20
+        type: string
+      maxNumberOfPartialDeliveriesAllowed:
+        format: double
+        type: number
+      overdeliveryToleranceLimit:
+        format: double
+        type: number
+      underdeliveryToleranceLimit:
+        format: double
+        type: number
+      division:
+        maxLength: 2
+        type: string
+      divisionDescription:
+        maxLength: 20
+        type: string
+      partialDelivery:
+        maxLength: 1
+        type: string
+      partialDeliveryDescription:
+        maxLength: 40
+        type: string
+      materialGroupHierarchy1:
+        maxLength: 18
+        type: string
+      materialGroupHierarchy2:
+        maxLength: 18
+        type: string
+      materialEntered:
+        maxLength: 18
+        type: string
+      pricingReferenceMaterial:
+        maxLength: 18
+        type: string
+      usageIndicator:
+        maxLength: 3
+        type: string
+      usageIndicatorDescription:
+        maxLength: 30
+        type: string
+      gramt:
+        format: double
+        type: number
+      schedulE_LINES:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocumentItem_Detail_SCHEDULE_LINES'
+      conditions:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocumentItem_Detail_CONDITIONS'
+      texts:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocumentItem_Detail_TEXTS'
+      useR_DEFINED:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocumentItem_Detail_USER_DEFINED'
+  SAP__SFCISalesDocumentItem_Detail_SCHEDULE_LINES:
+    type: object
+    properties:
+      scheduleLineNumber:
+        maxLength: 4
+        type: string
+      scheduleLineDate:
+        format: date-time
+        type: string
+      orderQuantity:
+        format: double
+        type: number
+      roundedQuantity:
+        format: double
+        type: number
+      confirmedQuantity:
+        format: double
+        type: number
+      salesUnit:
+        maxLength: 3
+        type: string
+      deliveryBlock:
+        maxLength: 2
+        type: string
+      deliveryBlockDescription:
+        maxLength: 20
+        type: string
+      deliveredQuantity:
+        format: double
+        type: number
+      scheduleLineCategory:
+        maxLength: 2
+        type: string
+      scheduleLineCategoryDescription:
+        maxLength: 20
+        type: string
+      purchaseRequisitionNumber:
+        maxLength: 10
+        type: string
+      purchaseRequisitionItemNumber:
+        maxLength: 5
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__SFCISalesDocumentItem_Detail_CONDITIONS:
+    type: object
+    properties:
+      stepNumber:
+        maxLength: 3
+        type: string
+      conditionCounter:
+        maxLength: 2
+        type: string
+      conditionType:
+        maxLength: 4
+        type: string
+      conditionTypeName:
+        maxLength: 20
+        type: string
+      rate:
+        format: double
+        type: number
+      rateUnit:
+        maxLength: 5
+        type: string
+      conditionPricingUnit:
+        format: double
+        type: number
+      conditionUnit:
+        maxLength: 3
+        type: string
+      conditionAmount:
+        format: double
+        type: number
+      salesDocumentCurrency:
+        maxLength: 5
+        type: string
+      condValueforCumulationFields:
+        format: double
+        type: number
+      condCurrencyforCumulationFlds:
+        maxLength: 5
+        type: string
+      conditionStatistics:
+        type: boolean
+      calculationType:
+        maxLength: 1
+        type: string
+      manuallyChanged:
+        maxLength: 1
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__SFCISalesDocumentItem_Detail_TEXTS:
+    type: object
+    properties:
+      textID:
+        maxLength: 4
+        type: string
+      textIDDescription:
+        maxLength: 20
+        type: string
+      textLanguage:
+        maxLength: 1
+        type: string
+      text:
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__SFCISalesDocumentItem_Detail_USER_DEFINED:
+    type: object
+    properties:
+      field:
+        maxLength: 30
+        type: string
+      value:
+        maxLength: 30
+        type: string
+      tableRowState:
+        enum:
+          - modified
+          - inserted
+        type: string
+  SAP__SFCISalesDocumentItem_Detail_Result:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/SAP__SFCISalesDocumentItem_Detail_SFCISalesDocumentItem'
+      key:
+        type: string
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP__SFCISalesDocumentItem_Search_SFCISalesDocumentItem_SC:
+    type: object
+    properties:
+      searchparams:
+        $ref: '#/definitions/SAP__SFCISalesDocumentItem_Search_SEARCHPARAMS'
+      changeD_DATE:
+        $ref: '#/definitions/SAP__SFCISalesDocumentItem_Search_CHANGED_DATE'
+      custom:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocumentItem_Search_CUSTOM'
+      pagingOptions:
+        $ref: '#/definitions/PagingOptions'
+  SAP__SFCISalesDocumentItem_Search_SEARCHPARAMS:
+    type: object
+    properties:
+      salesDocument:
+        maxLength: 10
+        type: string
+      itemNumber:
+        maxLength: 6
+        type: string
+      salesDocumentType:
+        maxLength: 4
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      customerNumber:
+        maxLength: 10
+        type: string
+      trackingNumber:
+        maxLength: 35
+        type: string
+      deliveryState:
+        maxLength: 2
+        type: string
+  SAP__SFCISalesDocumentItem_Search_CHANGED_DATE:
+    type: object
+    properties:
+      changeBeginDate:
+        format: date-time
+        type: string
+      changeEndDate:
+        format: date-time
+        type: string
+  SAP__SFCISalesDocumentItem_Search_CUSTOM:
+    type: object
+    properties:
+      field:
+        maxLength: 30
+        type: string
+      value:
+        maxLength: 30
+        type: string
+  SAP__SFCISalesDocumentItem_Search_SFCISalesDocumentItem_SR:
+    type: object
+    properties:
+      results:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocumentItem_Search_SEARCHRESULT'
+      pagingInfo:
+        $ref: '#/definitions/PagingInfo'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP__SFCISalesDocumentItem_Search_SEARCHRESULT:
+    type: object
+    properties:
+      salesDocument:
+        maxLength: 10
+        type: string
+      itemNumber:
+        maxLength: 6
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      itemDescription:
+        maxLength: 40
+        type: string
+      quantityRequested:
+        format: double
+        type: number
+      salesUnit:
+        maxLength: 3
+        type: string
+      salesUnitDescription:
+        maxLength: 20
+        type: string
+      customerNumber:
+        maxLength: 10
+        type: string
+      scheduleLineDate:
+        format: date-time
+        type: string
+      plant:
+        maxLength: 4
+        type: string
+      plantName:
+        maxLength: 30
+        type: string
+      netItemPrice:
+        format: double
+        type: number
+      conditionPricingUnit:
+        format: double
+        type: number
+      conditionUnit:
+        maxLength: 3
+        type: string
+      conditionUnitDescription:
+        maxLength: 20
+        type: string
+      netOrderValue:
+        format: double
+        type: number
+      taxAmount:
+        format: double
+        type: number
+      totalAmount:
+        format: double
+        type: number
+      salesDocumentCurrency:
+        maxLength: 5
+        type: string
+      deliveryState:
+        maxLength: 2
+        type: string
+      deliveryStateDescription:
+        maxLength: 40
+        type: string
+      trackingNumber:
+        maxLength: 35
+        type: string
+      numberOfDeliveries:
+        format: int32
+        type: integer
+      goodsIssuedQuantity:
+        format: double
+        type: number
+      custoM01:
+        type: string
+      custoM02:
+        type: string
+      custoM03:
+        type: string
+      custoM04:
+        type: string
+      custoM05:
+        type: string
+      custoM06:
+        type: string
+      custoM07:
+        type: string
+      custoM08:
+        type: string
+      custoM09:
+        type: string
+      custoM10:
+        type: string
+  SAP__SFCISalesDocument_Search_SFCISalesDocument_SC:
+    type: object
+    properties:
+      searchparams:
+        $ref: '#/definitions/SAP__SFCISalesDocument_Search_SEARCHPARAMS'
+      salesdoctype:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocument_Search_SALESDOCTYPE'
+      changeD_DATE:
+        $ref: '#/definitions/SAP__SFCISalesDocument_Search_CHANGED_DATE'
+      custom:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocument_Search_CUSTOM'
+      pagingOptions:
+        $ref: '#/definitions/PagingOptions'
+  SAP__SFCISalesDocument_Search_SEARCHPARAMS:
+    type: object
+    properties:
+      fromSalesDocumentNumber:
+        maxLength: 10
+        type: string
+      toSalesDocumentNumber:
+        maxLength: 10
+        type: string
+      soldToParty:
+        maxLength: 10
+        type: string
+      shipToParty:
+        maxLength: 10
+        type: string
+      customerPONumber:
+        maxLength: 20
+        type: string
+      material:
+        maxLength: 18
+        type: string
+      transactionGroup:
+        maxLength: 1
+        type: string
+      fromCreateDate:
+        format: date-time
+        type: string
+      toCreateDate:
+        format: date-time
+        type: string
+      openOnly:
+        type: boolean
+      completedOnly:
+        type: boolean
+      username:
+        maxLength: 12
+        type: string
+      salesDocumentVersionNumber:
+        maxLength: 12
+        type: string
+      yourReference:
+        maxLength: 12
+        type: string
+      shipToPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      deliveryBlock:
+        type: boolean
+      billingBlock:
+        type: boolean
+      creditBlock:
+        type: boolean
+  SAP__SFCISalesDocument_Search_SALESDOCTYPE:
+    type: object
+    properties:
+      salesDocumentType:
+        maxLength: 4
+        type: string
+  SAP__SFCISalesDocument_Search_CHANGED_DATE:
+    type: object
+    properties:
+      changedDateBegin:
+        format: date-time
+        type: string
+      changedDateEnd:
+        format: date-time
+        type: string
+  SAP__SFCISalesDocument_Search_CUSTOM:
+    type: object
+    properties:
+      field:
+        maxLength: 30
+        type: string
+      value:
+        maxLength: 30
+        type: string
+  SAP__SFCISalesDocument_Search_SFCISalesDocument_SR:
+    type: object
+    properties:
+      results:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/SAP__SFCISalesDocument_Search_SEARCHRESULT'
+      pagingInfo:
+        $ref: '#/definitions/PagingInfo'
+      messages:
+        uniqueItems: false
+        type: array
+        items:
+          $ref: '#/definitions/ReturnMessage'
+      success:
+        type: boolean
+  SAP__SFCISalesDocument_Search_SEARCHRESULT:
+    type: object
+    properties:
+      salesDocument:
+        maxLength: 10
+        type: string
+      customerPONumber:
+        maxLength: 20
+        type: string
+      createDate:
+        format: date-time
+        type: string
+      salesDocumentType:
+        maxLength: 4
+        type: string
+      salesDocumentTypeDescription:
+        maxLength: 20
+        type: string
+      soldToParty:
+        maxLength: 10
+        type: string
+      soldToName:
+        maxLength: 30
+        type: string
+      soldToCity:
+        maxLength: 40
+        type: string
+      soldToRegion:
+        maxLength: 3
+        type: string
+      soldToRegionDescription:
+        maxLength: 20
+        type: string
+      soldToCountry:
+        maxLength: 3
+        type: string
+      soldToCountryDescription:
+        maxLength: 50
+        type: string
+      shipToParty:
+        maxLength: 10
+        type: string
+      shipToName:
+        maxLength: 30
+        type: string
+      shipToCity:
+        maxLength: 40
+        type: string
+      shipToRegion:
+        maxLength: 3
+        type: string
+      shipToRegionDescription:
+        maxLength: 20
+        type: string
+      shipToCountry:
+        maxLength: 3
+        type: string
+      shipToCountryDescription:
+        maxLength: 50
+        type: string
+      netValueInDocumentCurrency:
+        format: double
+        type: number
+      taxAmountInDocumentCurrency:
+        format: double
+        type: number
+      sdDocumentCurrency:
+        maxLength: 5
+        type: string
+      orderStatus:
+        maxLength: 10
+        type: string
+      salesDocumentVersionNumber:
+        maxLength: 12
+        type: string
+      yourReference:
+        maxLength: 12
+        type: string
+      shipToPurchaseOrderNumber:
+        maxLength: 35
+        type: string
+      transactionGroup:
+        maxLength: 1
+        type: string
+      deliveryBlock:
+        maxLength: 2
+        type: string
+      deliveryBlockDescription:
+        maxLength: 20
+        type: string
+      billingBlock:
+        maxLength: 2
+        type: string
+      billingBlockDescription:
+        maxLength: 20
+        type: string
+      creditBlock:
+        maxLength: 1
+        type: string
+      creditBlockDescription:
+        maxLength: 50
+        type: string
+      deliveryStatus:
+        maxLength: 2
+        type: string
+      deliveryStatusDescription:
+        maxLength: 40
+        type: string
+      totalQuantity:
+        format: double
+        type: number
+      goodsIssuedQuantity:
+        format: double
+        type: number
+      lastChangedDate:
+        format: date-time
+        type: string
+      startDate:
+        format: date-time
+        type: string
+      endDate:
+        format: date-time
+        type: string
+      custoM01:
+        type: string
+      custoM02:
+        type: string
+      custoM03:
+        type: string
+      custoM04:
+        type: string
+      custoM05:
+        type: string
+      custoM06:
+        type: string
+      custoM07:
+        type: string
+      custoM08:
+        type: string
+      custoM09:
+        type: string
+      custoM10:
+        type: string
